@@ -116,7 +116,7 @@ class DES_PALR(object):
         results = []
         size = len(self.X_train)
         logger.debug('size: %d', size)
-        max_k = int(np.sqrt(size))
+        max_k = 4   # int(np.sqrt(size))
         logger.debug('max_k: %d', max_k)
         for k in range(2, max_k + 1):
             kmeans = KMeans(n_clusters=k, random_state=0).fit(self.X_train)
@@ -155,7 +155,7 @@ class DES_PALR(object):
         return ensemble
 
     def _forecast(self, x):
-        distances = np.linalg.norm(self.X_train - x, axis=1)
+        distances = np.linalg.norm(self.U - x, axis=1)
         C_i = np.argmin(distances)
         logger.debug('Ci = %d', C_i)
 
